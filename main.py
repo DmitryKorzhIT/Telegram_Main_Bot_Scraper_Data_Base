@@ -3,10 +3,12 @@ from pprint import pprint
 import json
 import pandas as pd
 
+from config import KEY
+from additional_functions import json_to_csv
+
 
 # Config data.
 URL_MOVIES = 'https://kinopoiskapiunofficial.tech/api/v2.2/films'
-KEY = '3bb02829-73f8-4599-b841-657276210588'
 
 
 # Variables.
@@ -34,20 +36,41 @@ params_value = {
 }
 
 
-# Get data from the API.
+# Get data from the API in .json format.
 r = requests.get(URL_MOVIES, headers=headers_value, params=params_value)
 json_result = r.json()
-json_result = json_result['items'][0]
 
 
-# Convert data in to .csv format.
-df = pd.DataFrame.from_dict(json_result, orient='index')
-# df.to_csv ('./.data/result.csv', index = None)
-df.to_csv('./.data/result.csv', mode='a', header=False)
+# Columns for pandas.DataFrame.
+atributes = ['nameRu',
+             'nameOriginal',
+             'nameEn',
 
-pprint(json_result)
+             'ratingKinopoisk',
+             'ratingImdb',
+
+             'kinopoiskId',
+             'imdbId',
+
+             'type',
+             'year',
+
+             'posterUrl',
+             'posterUrlPreview',
+
+             'countries',
+             'genres']
+
+movies_df = pd.DataFrame(columns=atributes)
+json_result = r.json()
 
 
+# Convert .json format to pandas.DataFrame with editing countries and genres attributes.
+movies_df = json_to_csv()
+
+
+# Save pd.DataFrame to .csv file.
+movies_df.to_csv('./.data/data.csv', mode='w', index=False)
 
 
 

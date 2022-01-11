@@ -1,4 +1,6 @@
 .idea
+__pycache__
 venv
-.ipynb*
+*.ipynb*
 Old_data/
+config.py
