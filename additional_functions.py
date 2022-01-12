@@ -1,12 +1,10 @@
 # Convert .json format to pandas.DataFrame with editing countries and genres attributes.
-def json_to_csv():
-
-    from main import json_result, atributes, movies_df
+def json_to_csv(json_result, attributes, movies_df):
 
     for movie in range(len(json_result['items'])):
 
-        for atribute in atributes:
-            movies_df.at[movie, atribute] = json_result['items'][movie][atribute]
+        for attribute in attributes:
+            movies_df.at[movie, attribute] = json_result['items'][movie][attribute]
 
         # Convert countries from dictionaries format to string format.
         countries_list = []
