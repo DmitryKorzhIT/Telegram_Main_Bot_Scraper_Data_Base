@@ -1,4 +1,5 @@
 import requests
+import os
 from pprint import pprint
 import json
 import pandas as pd
@@ -70,8 +71,12 @@ movies_df = json_to_csv(json_result=json_result,
                         movies_df=movies_df)
 
 
-# Save pd.DataFrame to .csv file.
-movies_df.to_csv('./.data/data.csv', mode='a', index=False)
+# Save pd.DataFrame to a .csv file.
+if os.path.isfile('./.data/data.csv'):  # if file exist.
+    movies_df.to_csv('./.data/data.csv', mode='a', index=False, header=False)
+else:  # if file doesn't exist
+    movies_df.to_csv('./.data/data.csv', mode='w', index=False, header=True)
+
 
 
 
