@@ -11,6 +11,8 @@ def json_to_csv(json_result, attributes, movies_df):
         # Check, do we have rating data.
         elif json_result['items'][movie]['ratingKinopoisk'] == None:
             continue
+        elif json_result['items'][movie]['nameRu'] == None:
+            continue
 
         for attribute in attributes:
             movies_df.at[movie, attribute] = json_result['items'][movie][attribute]

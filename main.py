@@ -92,13 +92,13 @@ for year in range(year_from_value,year_to_value):
                                     movies_df=movies_df)
 
             # Save pd.DataFrame to a .csv file.
-            if os.path.isfile('./.data/data.csv'):  # if file exist.
-                movies_df.to_csv('./.data/data.csv', mode='a', index=False, header=False)
+            if os.path.isfile('./.data/data_v.1.0.csv'):  # if file exist.
+                movies_df.to_csv('./.data/data_v.1.0.csv', mode='a', index=False, header=False)
             else:  # if file doesn't exist
-                movies_df.to_csv('./.data/data.csv', mode='w', index=False, header=True)
+                movies_df.to_csv('./.data/data_v.1.0.csv', mode='w', index=False, header=True)
 
             # Write data in to a log file.
-            file_log = open('./.data/log.log', mode='a')
+            file_log = open('./.data_v.1.0_log.log', mode='a')
             file_log.write(f'Done!\t\t'
                            f'Time: {datetime.now().time()};\t\t'
                            f'Year: {year};\t\t'
